@@ -1,5 +1,8 @@
 {
   "name": "TImestamp Microservice",
   "version": "0.0.1",
-  "author":"Abhinav"
+  "author": "Abhinav",
+  "dependencies": {
+    "express": "^4.15.3"
   }
+}
