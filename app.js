@@ -10,8 +10,12 @@ app.get('/:timestamp',function (req,res) {
         if(date.toString()==="Invalid Date")
             response.valid=false;
         else{
+            var day=date.getDate();
+            var month=date.getMonth();
+            var year=date.getFullYear();
+            response.valid=true;
             response.Unix=time;
-            response.Natural=date;
+            response.Natural=day+'/'+month+'/'+year;
         }
         res.send(JSON.stringify(response));
     }
