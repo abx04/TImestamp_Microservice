@@ -1,8 +1,16 @@
 {
-  "name": "TImestamp Microservice",
+  "name": "Timestamp Microservice",
   "version": "0.0.1",
   "author": "Abhinav",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "^4.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxabhi04/TImestamp_Microservice"
   }
 }
