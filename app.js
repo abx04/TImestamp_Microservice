@@ -3,10 +3,11 @@ var app=express();
 
 var response={};
 
-app.use('/',express.static(__dirname+'/public'));
+app.use(express.static(__dirname+'/public'));
+
 app.get('/',function(req,res){
     res.redirect('/index.html');
-})
+});
 
 app.get('/:timestamp',function (req,res) {
     var time=req.params.timestamp;
