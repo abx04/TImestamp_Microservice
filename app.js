@@ -9,9 +9,7 @@ app.get('/:timestamp',function (req,res) {
     if(!isNaN(time)) {
         var date = new Date(parseInt(time));
         if (date.toString() === 'Invalid Date') {
-            response.valid = false;
-            response.unix = null;
-            response.natural = null;
+            createResponse(false);
         }
 
         else response = createResponse(true,time);
@@ -19,9 +17,7 @@ app.get('/:timestamp',function (req,res) {
     else{
         date=new Date(time);
         if(date.toString()==='Invlid String'){
-            response.valid=false;
-            response.unix=null;
-            response.natural=null;
+            createResponse(false);
         }
         else response=createResponse(true,Date.parse(date));
 
@@ -30,22 +26,26 @@ app.get('/:timestamp',function (req,res) {
 });
 
 var createResponse=function (isValid,timestamp) {
-    var naturalDate=new Date(parseInt(timestamp));
-    var day=naturalDate.getDate();
-    var month=alphaMonth(naturalDate.getMonth());
-    var year=naturalDate.getFullYear();
+    if(!isValid){
+        return {
+            valid:false,
+            unix:null,
+            natural:null
+        }
+    }
+    else{
+        var naturalDate=new Date(parseInt(timestamp));
+        var day=naturalDate.getDate();
+        var month=alphaMonth(naturalDate.getMonth());
+        var year=naturalDate.getFullYear();
 
-    console.log(timestamp);
-    console.log(naturalDate);
-    console.log(day);
-    console.log(month);
-    console.log(year);
+        var date=month+' '+day+', '+year;
 
-    var date=month+' '+day+', '+year;
-    return {
-        valid:isValid,
-        unix:timestamp,
-        natural:date
+        return {
+            valid:isValid,
+            unix:timestamp,
+            natural:date
+        }
     }
 };
 
@@ -53,7 +53,7 @@ var alphaMonth=function (month) {
     var monthArray=['January','February','March','April','May','June','July','August','September','October','November','December'];
     return monthArray[month];
 
-}
+};
 
 app.listen(8080);
 
